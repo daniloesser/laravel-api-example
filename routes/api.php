@@ -31,5 +31,8 @@ Route::group(['middleware' => 'debug-api'], function () {
     Route::resources([
         'customers' => 'CustomersController'
     ]);
+
+    Route::get('availability', 'ExpertsAvailabilityController@index');
+    Route::put('availability/{id}', 'ExpertsAvailabilityController@update');
 });
 

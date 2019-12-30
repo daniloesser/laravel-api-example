@@ -66,6 +66,42 @@ return [
             'block_for' => null,
         ],
 
+        'rabbitmq' => [
+
+            'driver' => 'rabbitmq',
+            'queue' => env('RABBITMQ_QUEUE', 'default'),
+            'connection' => PhpAmqpLib\Connection\AMQPLazyConnection::class,
+
+            'hosts' => [
+                [
+                    'host' => env('RABBITMQ_HOST', 'cat.rmq.cloudamqp.com'),
+                    'port' => env('RABBITMQ_PORT', 5672),
+                    'user' => env('RABBITMQ_USER', 'ygotkxrk'),
+                    'password' => env('RABBITMQ_PASSWORD', 'e92Hjl-A6T6n2rlqLszOFafE1bt2t5Y_'),
+                    'vhost' => env('RABBITMQ_VHOST', 'ygotkxrk'),
+                ],
+            ],
+
+            'options' => [
+                'exchange' => [
+                    'name' => env('RABBITMQ_EXCHANGE_NAME', 'default')
+                ]
+//                'ssl_options' => [
+//                    'cafile' => env('RABBITMQ_SSL_CAFILE', null),
+//                    'local_cert' => env('RABBITMQ_SSL_LOCALCERT', null),
+//                    'local_key' => env('RABBITMQ_SSL_LOCALKEY', null),
+//                    'verify_peer' => env('RABBITMQ_SSL_VERIFY_PEER', true),
+//                    'passphrase' => env('RABBITMQ_SSL_PASSPHRASE', null),
+//                ],
+            ],
+
+            /*
+             * Set to "horizon" if you wish to use Laravel Horizon.
+             */
+            'worker' => env('RABBITMQ_WORKER', 'default'),
+
+        ],
+
     ],
 
     /*
