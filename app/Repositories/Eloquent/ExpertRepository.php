@@ -1,16 +1,19 @@
-<?php namespace App\Repositories;
+<?php
 
-use Illuminate\Database\Eloquent\Model;
+namespace App\Repositories\Eloquent;
 
-class Repository implements RepositoryInterface
+use App\Models\User;
+use App\Repositories\Contracts\ExpertRepositoryInterface;
+
+class ExpertRepository implements ExpertRepositoryInterface
 {
     // model property on class instances
     protected $model;
 
     // Constructor to bind model to repo
-    public function __construct(Model $model)
+    public function __construct()
     {
-        $this->model = $model;
+        $this->model = New User();
     }
 
     // Get all instances of model

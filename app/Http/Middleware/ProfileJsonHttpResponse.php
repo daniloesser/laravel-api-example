@@ -28,13 +28,14 @@ class ProfileJsonHttpResponse
                 app('debugbar')->isEnabled()
             ) {
                 $queries_data = $this->sqlFilter(app('debugbar')->getData());
-
-                $response->setContent(json_decode($response->getContent(), true) + [
-                        '_debugbar' => [
-                            'total_queries' => count($queries_data),
-                            'queries' => $queries_data,
-                        ]
-                    ]);
+                if ($queries_data) {
+                    $response->setContent(json_decode($response->getContent(), true) + [
+                            '_debugbar' => [
+                                'total_queries' => count($queries_data),
+                                'queries' => $queries_data,
+                            ]
+                        ]);
+                }
             }
         }
         return $response;

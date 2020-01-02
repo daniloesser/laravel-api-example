@@ -99,6 +99,7 @@ class Expert extends Model
     ];
 
 
+
     public function User()
     {
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
@@ -108,4 +109,5 @@ class Expert extends Model
     {
         return $this->hasMany('App\Models\ExpertAvailability', 'cleaner_id', 'id');
     }
+
 }

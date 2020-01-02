@@ -176,6 +176,8 @@ return [
         App\Providers\EventServiceProvider::class,
         //App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Repositories\Providers\ExpertRepositoryServiceProvider::class,
+        App\Repositories\Providers\CustomerRepositoryServiceProvider::class,
 
     ],
 

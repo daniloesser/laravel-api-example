@@ -1,17 +1,15 @@
 <?php namespace App\Services;
 
-
-use App\Models\User;
-use App\Repositories\Repository;
+use App\Repositories\Contracts\ExpertRepositoryInterface;
 
 class Experts extends Service
 {
 
     private $repository;
 
-    public function __construct(User $user)
+    public function __construct(ExpertRepositoryInterface $expertRepository)
     {
-        $this->repository = new Repository($user);
+        $this->repository = $expertRepository;
     }
 
     public function getPaginatedBy($page_size)

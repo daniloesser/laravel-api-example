@@ -1,17 +1,16 @@
 <?php namespace App\Services;
 
 
-use App\Models\User;
-use App\Repositories\Repository;
+use App\Repositories\Contracts\CustomerRepositoryInterface;
 
 class Customers extends Service
 {
 
     private $repository;
 
-    public function __construct(User $user)
+    public function __construct(CustomerRepositoryInterface $customerRepository)
     {
-        $this->repository = new Repository($user);
+        $this->repository = $customerRepository;
     }
 
     public function getPaginatedBy($page_size)

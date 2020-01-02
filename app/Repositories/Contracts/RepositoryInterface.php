@@ -1,4 +1,6 @@
-<?php namespace App\Repositories;
+<?php
+
+namespace App\Repositories\Contracts;
 
 interface RepositoryInterface
 {
@@ -12,5 +14,4 @@ interface RepositoryInterface
 
     public function show($id);
 
-    public function paginate($items);
 }
