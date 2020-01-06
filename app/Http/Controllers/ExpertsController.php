@@ -94,4 +94,9 @@ class ExpertsController extends Controller
 
         return 204;
     }
+
+    public function checkin()
+    {
+
+    }
 }
