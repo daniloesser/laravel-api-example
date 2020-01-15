@@ -8,6 +8,7 @@
 
 namespace App\Transformers;
 
+use App\Models\Customer;
 use App\Models\User;
 use League\Fractal\TransformerAbstract;
 
@@ -17,12 +18,11 @@ class CustomerTransformer extends TransformerAbstract
         'roles'
     ];
 
-    public function transform(User $user)
+    public function transform(Customer $customer)
     {
         return [
-            'id' => $user->id,
-            'name' => $user->first_name . ' ' . $user->last_name,
-            'email' => $user->email,
+            'id' => $customer->id,
+            'name' => $customer->first_name . ' ' . $customer->last_name,
         ];
     }
 

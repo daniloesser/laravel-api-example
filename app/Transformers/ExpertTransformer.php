@@ -8,6 +8,7 @@
 
 namespace App\Transformers;
 
+use App\Models\Expert;
 use App\Models\User;
 use League\Fractal\TransformerAbstract;
 
@@ -18,16 +19,11 @@ class ExpertTransformer extends TransformerAbstract
         'availability'
     ];
 
-    public function transform(User $user)
+    public function transform(Expert $expert)
     {
         return [
-            'id' => $user->id,
-            'name' => $user->first_name . ' ' . $user->last_name,
-            'email' => $user->email,
-            'business_name' => empty($user->expert->business_name) ? 'Not Informed' : $user->expert->business_name,
-            'mobile_number' => $user->expert->mobile_number,
-            'cleaner_id' => $user->expert->id,
-            'experience' => ucfirst(strtolower($user->expert->your_experience))
+            'id' => $expert->id,
+            'name' => $expert->first_name . ' ' . $expert->last_name,
         ];
     }
 

@@ -25,14 +25,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::delete('users/{id}', 'UsersController@delete');
 
 Route::group(['middleware' => 'debug-api'], function () {
-    Route::resources([
-        'experts' => 'ExpertsController'
-    ]);
-    Route::resources([
-        'customers' => 'CustomersController'
-    ]);
 
-    Route::get('availability', 'ExpertsAvailabilityController@index');
-    Route::put('availability/{id}', 'ExpertsAvailabilityController@update');
+    Route::get('checklist', 'checklistController@index');
+    Route::post('checklist', 'checklistController@store');
+
+    //Route::get('/checklist2/{id}/items','checklist2Controller@getItems');
+    //Route::get('/checklist/{id}','checklistController@getItems');
+    //Route::get('/checklist/bySeries/{series_fk}','checklistController@getBySeries');
+
 });
+
+
 

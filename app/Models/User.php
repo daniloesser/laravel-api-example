@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Group;
+use App\Models\Expert;
+use App\Models\Customer;
 
 class User extends Authenticatable
 {
@@ -51,11 +54,16 @@ class User extends Authenticatable
 
     public function Groups()
     {
-        return $this->belongsToMany('App\Models\Group', 'j2y6w_users_groups', 'user_id', 'group_id');
+        return $this->belongsToMany(Group::class, 'j2y6w_users_groups', 'user_id', 'group_id');
     }
 
     public function Expert()
     {
-        return $this->hasOne('App\Models\Expert', 'user_id', 'id');
+        return $this->hasOne(Expert::class, 'user_id', 'id');
+    }
+
+    public function Customer()
+    {
+        return $this->hasOne(Customer::class, 'user_id', 'id');
     }
 }

@@ -102,12 +102,12 @@ class Expert extends Model
 
     public function User()
     {
-        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function Availability()
     {
-        return $this->hasMany('App\Models\ExpertAvailability', 'cleaner_id', 'id');
+        return $this->hasMany(ExpertAvailability::class, 'cleaner_id', 'id');
     }
 
 }
