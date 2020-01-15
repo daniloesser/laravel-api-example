@@ -176,9 +176,6 @@ return [
         App\Providers\EventServiceProvider::class,
         //App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Repositories\Providers\ExpertRepositoryServiceProvider::class,
-        App\Repositories\Providers\CustomerRepositoryServiceProvider::class,
-        App\Repositories\Providers\ChecklistRepositoryServiceProvider::class,
 
     ],
 
@@ -230,7 +227,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
     ],
 
 ];
