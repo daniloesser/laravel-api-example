@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Dtos\ChecklistDTO;
+use App\Dtos\PaginationDTO;
 use App\Http\Requests\ChecklistRequest;
 use App\Services\Checklists;
-use App\Services\Log;
 use http\Exception;
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
+use PHPExperts\DataTypeValidator\InvalidDataTypeException;
 
 class ChecklistController extends Controller
 {
@@ -25,21 +27,22 @@ class ChecklistController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function index(Request $request)
     {
         try {
-            $checklistRequestObj = new ChecklistRequest();
-            $checklistRequestObj->setIncludes($request->get('include', 'business,customer'));
-            $checklistRequestObj->setExcludes($request->get('exclude', 'checklist.item'));
-            $checklistRequestObj->setPaginated(true);
-            $checklistRequestObj->setPage($request->get('page', '1'));
-            $checklistRequestObj->setPageSize(10);
+            $paginationDTO = new PaginationDTO($request, true);
 
-            $data = $this->service->getAll($checklistRequestObj);
+            $data = $this->service->getAll($paginationDTO);
             return response()->json($data, 200);
-        } catch (Exception $ex) { // Anything that went wrong
+
+        } catch (InvalidDataTypeException $e) {
+            throw new \Exception(implode(", ", $e->getReasons()), 400);
+        } catch
+        (Exception $ex) { // Anything that went wrong
             throw new \Exception('There was an error. Please try again.', 400);
         }
     }
@@ -47,14 +50,27 @@ class ChecklistController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @param ChecklistRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function store(ChecklistRequest $request)
     {
-        $validated = $request->validated();
-        info("Creating a new checklist for series {$validated['series_fk']}", ['data' => $validated]);
+        try {
+            //['series_fk'=>3, 'is_active'=>0,'non_sense'=>'true']
+            $checklistDTO = new ChecklistDTO($request->validated());
 
-        dd($validated);
+            $created = $this->service->create($checklistDTO);
+            info("New checklist created: ", ['data' => $checklistDTO->jsonSerialize()]);
+
+            return response()->json($created, 201);
+
+        } catch (InvalidDataTypeException $e) {
+            //throw new \Exception('There was an error. Please try again.', 400);
+            throw new \Exception(implode(", ", $e->getReasons()), 400);
+        } catch (Exception $ex) {
+            throw new \Exception('There was an error. Please try again.', 400);
+        }
     }
 
     /**
@@ -72,7 +88,7 @@ class ChecklistController extends Controller
      *
      * @param int $id
      */
-    public function update(ChecklistRequest $request, $id)
+    public function update(ChecklistDTO $checklistDTO, $id)
     {
         //
     }

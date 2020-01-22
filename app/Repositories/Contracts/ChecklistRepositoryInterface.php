@@ -2,9 +2,12 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Http\Requests\ChecklistRequest;
+use App\Dtos\ChecklistDTO;
+use App\Dtos\PaginationDTO;
 
 interface ChecklistRepositoryInterface extends RepositoryInterface
 {
-    public function getAllChecklistFromEvent(ChecklistRequest $requestObj);
+    public function getAllChecklistFromEvent(PaginationDTO $paginationDTO);
+
+    public function create(ChecklistDTO $checklistDTO);
 }

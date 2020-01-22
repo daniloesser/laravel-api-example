@@ -1,10 +1,9 @@
 <?php namespace App\Services;
 
 
-use App\Http\Requests\ChecklistRequest;
+use App\Dtos\ChecklistDTO;
+use App\Dtos\PaginationDTO;
 use App\Repositories\Eloquent\ChecklistRepository;
-use Illuminate\Http\Request;
-use stdClass;
 
 class Checklists extends Service
 {
@@ -15,9 +14,15 @@ class Checklists extends Service
         $this->repository = new ChecklistRepository();
     }
 
-    public function getAll(ChecklistRequest $requestObj)
+    public function getAll(PaginationDTO $paginationDTO)
     {
-        $data = $this->repository->getAllChecklistFromEvent($requestObj);
+        $data = $this->repository->getAllChecklistFromEvent($paginationDTO);
         return $data;
+    }
+
+    public function create(ChecklistDTO $checklistDTO)
+    {
+        $created = $this->repository->create($checklistDTO);
+        return $created;
     }
 }
