@@ -26,8 +26,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'debug-api'], function () {
 
-    Route::get('checklist', 'checklistController@index');
-    Route::post('checklist', 'checklistController@store');
+    Route::get('checklist', 'ChecklistController@index');
+    Route::post('checklist', 'ChecklistController@store');
 
     //Route::get('/checklist2/{id}/items','checklist2Controller@getItems');
     //Route::get('/checklist/{id}','checklistController@getItems');
