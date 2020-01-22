@@ -61,9 +61,9 @@ class ChecklistController extends Controller
             $checklistDTO = new ChecklistDTO($request->validated());
 
             $created = $this->service->create($checklistDTO);
-            info("New checklist created: ", ['data' => $checklistDTO->jsonSerialize()]);
+            info("New checklist created: ", ['data' => $created->jsonSerialize()]);
 
-            return response()->json($created, 201);
+            return response()->json($created->jsonSerialize(), 201);
 
         } catch (InvalidDataTypeException $e) {
             //throw new \Exception('There was an error. Please try again.', 400);

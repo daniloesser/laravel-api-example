@@ -20,9 +20,11 @@ class Checklists extends Service
         return $data;
     }
 
-    public function create(ChecklistDTO $checklistDTO)
+    public function create(ChecklistDTO $checklistDTO): ChecklistDTO
     {
         $created = $this->repository->create($checklistDTO);
-        return $created;
+        $response = new ChecklistDTO($created->toArray());
+
+        return $response;
     }
 }

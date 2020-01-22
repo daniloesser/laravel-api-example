@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use PHPExperts\SimpleDTO\SimpleDTO;
 
 /**
+ * @property-read ?int $id
  * @property-read int $series_fk
  * @property-read int $is_active
  * @property-read ?Carbon $created_at
