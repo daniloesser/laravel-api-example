@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dtos\ChecklistDTO;
+use App\Dtos\ChecklistDTORaw;
 use App\Dtos\PaginationDTO;
 use App\Http\Requests\ChecklistRequest;
 use App\Services\Checklists;
@@ -34,7 +35,7 @@ class ChecklistController extends Controller
     public function index(Request $request)
     {
         try {
-            $paginationDTO = new PaginationDTO($request, true);
+            $paginationDTO = new PaginationDTO($request);
 
             $data = $this->service->getAll($paginationDTO);
             return response()->json($data, 200);
@@ -58,12 +59,12 @@ class ChecklistController extends Controller
     {
         try {
             //['series_fk'=>3, 'is_active'=>0,'non_sense'=>'true']
-            $checklistDTO = new ChecklistDTO($request->validated());
+            $checklistDTO = new ChecklistDTORaw($request->validated());
 
             $created = $this->service->create($checklistDTO);
-            info("New checklist created: ", ['data' => $created->jsonSerialize()]);
+            info("New checklist created: ", ['data' => $created->toJson()]);
 
-            return response()->json($created->jsonSerialize(), 201);
+            return response()->json($created->toArray(), 201);
 
         } catch (InvalidDataTypeException $e) {
             //throw new \Exception('There was an error. Please try again.', 400);

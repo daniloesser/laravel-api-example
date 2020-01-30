@@ -3,24 +3,20 @@
 namespace App\Dtos;
 
 use Illuminate\Http\Request;
-use PHPExperts\SimpleDTO\SimpleDTO;
 
-/**
- * @property-read string $include
- * @property-read string $exclude
- * @property-read bool $paginated
- * @property-read int $pageSize
- * @property-read int $page
- */
-class PaginationDTO extends SimpleDTO
+class PaginationDTO extends GenericDTO
 {
-    public function __construct(Request $request, $paginated = true)
+    private bool $paginated = true;
+    private int $page;
+    private int $pageSize = 10;
+    private ?string $include;
+    private ?string $exclude;
+
+
+    public function __construct(Request $request)
     {
-        $input['paginated'] = $paginated;
-        $input['include'] = $request->get('include', 'business,customer');
-        $input['exclude'] = $request->get('exclude', 'checklist.item');
-        $input['page'] = (int)$request->get('page', 1);
-        $input['pageSize'] = 10;
-        parent::__construct($input);
+        $this->include = $request->get('include', 'business,customer');
+        $this->exclude = $request->get('exclude', 'checklist.item');
+        $this->page = (int)$request->get('page', 1);
     }
 }

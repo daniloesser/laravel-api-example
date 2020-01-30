@@ -1,7 +1,7 @@
 <?php namespace App\Services;
 
 
-use App\Dtos\ChecklistDTO;
+use App\Dtos\ChecklistDTORaw;
 use App\Dtos\PaginationDTO;
 use App\Repositories\Eloquent\ChecklistRepository;
 
@@ -20,10 +20,10 @@ class Checklists extends Service
         return $data;
     }
 
-    public function create(ChecklistDTO $checklistDTO): ChecklistDTO
+    public function create(ChecklistDTORaw $checklistDTO): ChecklistDTORaw
     {
         $created = $this->repository->create($checklistDTO);
-        $response = new ChecklistDTO($created->toArray());
+        $response = new ChecklistDTORaw($created->toArray());
 
         return $response;
     }

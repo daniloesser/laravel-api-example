@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Dtos\ChecklistDTO;
+use App\Dtos\ChecklistDTORaw;
 use App\Dtos\PaginationDTO;
 use App\Http\Requests\ChecklistRequest;
 use App\Models\Checklist;
@@ -63,7 +64,7 @@ class ChecklistRepository extends Repository implements ChecklistRepositoryInter
         return collect($this->fractal->createData($formatted)->toArray());
     }
 
-    public function create(ChecklistDTO $checklistDTO)
+    public function create(ChecklistDTORaw $checklistDTO)
     {
 
         $newChecklist = New Checklist();
